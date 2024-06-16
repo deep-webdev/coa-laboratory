@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="coa_measure_tree" model="ir.ui.view">
+        <field name="name">coa.measure.tree</field>
+        <field name="model">coa.measure</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id" />
+                <field name="batch_no" />
+                <field name="partner_id" />
+                <field name="chemical_formula"/>
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="view_coa_measure_form" model="ir.ui.view">
+        <field name="name">coa.measure.form</field>
+        <field name="model">coa.measure</field>
+        <field name="arch" type="xml">
+            <form name="coa" string="Certificate of Analysis">
+                <sheet>
+                    <group name="basics">
+                        <group>
+                            <field name="product_id" />
+                            <field name="partner_id" />
+                            <field name="batch_no" />
+                            <label for="mfg_month" />
+                            <div class="o_row">
+                                <field name="mfg_month"/> 
+                                <field name="mfg_year"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="chemical_formula" />
+                            <field name="date" />
+                            <label for="exp_month" />
+                            <div class="o_row">
+                                <field name="exp_month"/>
+                                <field name="exp_year"/>
+                            </div>
+                        </group>    
+                    </group>
+                    <notebook>
+                        <page name="specification" string="Specifications">
+                            <group name="specs">
+                                <field name="purity"/>
+                                <field name="copper"/>
+                                <field name="acidity"/>
+                                <field name="ph"/>
+                                <field name="lead"/>
+                                <field name="cadmium"/>
+                                <field name="iron"/>
+                                <field name="free_moisture"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_coa_products" model="ir.actions.act_window">
+        <field name="name">COA</field>
+        <field name="res_model">coa.measure</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create a new COA,
+            </p><p>
+            Once the COA is ready, it can be deliver to customer.<br/> You will be able to create sample outward to the customer.
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

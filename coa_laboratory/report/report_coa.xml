@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_coa_analysis">
+    	<t t-call="web.external_layout">
+        	<t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+        	<div class="page">
+	            <div class="oe_structure"/>
+
+	            <h4 class="mt-4 text-center">
+	                <span>CERTIFICATE OF ANALYSIS</span>
+	            </h4>
+
+	            <br/>
+
+	            <div class="oe_structure"></div>
+	            <table name="main_table" class="table table-sm o_main_table text-center">
+	            	<tr style="font-weight: bold;">
+	            		<td width="20%">NAME OF PRODUCT</td>
+	            		<td width="30%"><strong><span t-field="doc.product_id.name" /></strong></td>
+	            		<td width="20%"><strong>CHEMICAL FORMULA</strong></td>
+	            		<td width="30%"><strong><span t-field="doc.chemical_formula" /></strong></td>
+	            	</tr>
+	            	<tr>
+	            		<td>BATCH NO</td>
+	            		<td><span t-field="doc.batch_no" /></td>
+	            		<td>DATE</td>
+	            		<td><span t-field="doc.date" /></td>
+	            	</tr>
+	            	<tr>
+	            		<td>MFG. MONTH</td>
+	            		<td><span t-field="doc.mfg_month" /> - <span t-field="doc.mfg_year"/></td>
+	            		<td>EXP. MONTH</td>
+	            		<td><span t-field="doc.exp_month" /> - <span t-field="doc.exp_year"/></td>
+	            	</tr>
+	            </table>
+	            <br/>
+	            <br/>
+	            <table name="statistics" class="table table-sm o_main_table">
+	            	<thead>
+	            		<tr>
+	                        <th name="sr_no" class="text-center">SR. No</th>
+	                        <th name="parameters" class="text-center">PARAMETERS</th>
+	                        <th name="specification" class="text-center">SPECIFICATION</th>
+	                    </tr>
+	            	</thead>
+	            	<tbody class="text-center">
+	            		<tr>
+	            			<td>1</td>
+	            			<td>Purity</td>
+	            			<td><span t-field="doc.purity">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>2</td>
+	            			<td>Copper (as Cu)</td>
+	            			<td><span t-field="doc.copper">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>3</td>
+	            			<td>Acidity (Free H2SO4)</td>
+	            			<td><span t-field="doc.acidity">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>4</td>
+	            			<td>pH ( 5% solution)</td>
+	            			<td><span t-field="doc.ph">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>5</td>
+	            			<td>Lead (as Pb)</td>
+	            			<td><span t-field="doc.lead">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>6</td>
+	            			<td>Cadmium (as Cd)</td>
+	            			<td><span t-field="doc.cadmium">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>7</td>
+	            			<td>Iron (as Fe)</td>
+	            			<td><span t-field="doc.iron">Nil</span></td>
+	            		</tr>
+	            		<tr>
+	            			<td>8</td>
+	            			<td>Free Moisture</td>
+	            			<td><span t-field="doc.free_moisture">Nil</span></td>
+	            		</tr>
+	            	</tbody>
+	            </table>
+	        </div>
+        </t>
+   	</template>
+
+   	<template id="report_coa_analysis_raw">
+		<t t-call="web.html_container">
+		    <t t-foreach="docs" t-as="doc">
+		        <t t-call="coa_laboratory.report_coa_analysis" t-lang="doc.partner_id.lang"/>
+		    </t>
+		</t>
+	</template>
+
+	<record id="action_report_coa_analysis" model="ir.actions.report">
+        <field name="name">COA Measure</field>
+        <field name="model">coa.measure</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">coa_laboratory.report_coa_analysis_raw</field>
+        <field name="report_file">coa_laboratory.report_coa_analysis_raw</field>
+        <field name="print_report_name">'COA - %s' % (object.product_id.name)</field>
+        <field name="binding_model_id" ref="model_coa_measure"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

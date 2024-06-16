@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="product_template_only_form_view_coa_inherit" model="ir.ui.view">
+        <field name="name">product.template.coa.form</field>
+        <field name="model">product.template</field>
+        <field name="priority" eval="99" />
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//div[@name='options']" position="inside">
+        		<span class="d-inline-block" invisible="product_variant_count &gt; 1">
+                    <field name="is_sample_product"/>
+                    <label for="is_sample_product"/>
+                </span>
+        	</xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_coa" type="object" icon="fa-bars" class="oe_stat_button" groups="coa_laboratory.group_coa_measures" invisible="product_variant_count &gt; 1">
+                    <field string="COA" name="coa_product_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_normal_form_coa_view" model="ir.ui.view">
+        <field name="name">product.product.coa.form</field>
+        <field name="model">product.product</field>
+        <field name="priority" eval="99" />
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//div[@name='options']" position="inside">
+        		<span class="d-inline-block">
+                    <field name="is_sample_product"/>
+                    <label for="is_sample_product"/>
+                </span>
+        	</xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_coa" type="object" icon="fa-bars" class="oe_stat_button" groups="coa_laboratory.group_coa_measures">
+                    <field string="COA" name="coa_product_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

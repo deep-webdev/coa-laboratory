@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+coa_laboratory.access_coa_measure,access_coa_measure,coa_laboratory.model_coa_measure,coa_laboratory.group_coa_measures,1,1,1,1

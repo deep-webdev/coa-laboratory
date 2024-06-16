@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <menuitem id="coa_menu_root"
+        name="COA"
+        web_icon="coa_laboratory,static/description/icon.png"
+        active="True"
+        sequence="20">
+
+        <menuitem id="coa_main_menu"
+            name="COA"
+            sequence="10">
+
+            <menuitem id="menu_coa_products"
+                action="action_coa_products"
+                groups="coa_laboratory.group_coa_measures"
+                sequence="10"/>
+        </menuitem>
+
+    </menuitem>
+
+</odoo>
